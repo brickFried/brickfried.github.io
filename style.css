@@ -1,0 +1,162 @@
+body{
+    display: flex;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#mainGame{
+    width:133vh;
+    height:100vh;
+    top: 0%;
+	display:flex;
+	justify-content:center;
+}
+
+#deckA{
+    bottom: 0;
+}
+
+#deckB{
+    top: 0;
+}
+
+.card:nth-child(1)
+{
+	left: 5vh;
+}
+
+.card:nth-child(2)
+{
+	left: 35vh;
+}
+
+.card:nth-child(3)
+{
+	left: 65vh;
+}
+
+.card:nth-child(4)
+{
+	left: 95vh;
+}
+
+.deck {
+    width: 133vh;
+    height: 27vh;
+	position: absolute;
+    background-color: grey;
+}
+
+.healthBar {
+	position: absolute;
+	display:flex;
+	width: 30vh;
+	height: 5vh;
+	border:solid;
+	border-color: black;
+	border-width: 3px;
+	background-color: grey;
+	border-radius: 1.5vh;
+}
+
+.healthFill {
+	width: 100%;
+	height: 100%;
+	background-color: rgb(35,180,0);;
+	position: absolute;
+	border-radius: 1.5vh;
+	transition: width 0.5s ease-in-out;
+}
+
+#healthBarA{
+	left: 50vh;
+	bottom: 30vh;
+}
+#healthBarB{
+	right: 50vh;
+	top: 30vh;
+}
+.healthLabel {
+	color: white;
+	font-size: 4vh;
+	position:absolute;
+	left: 50%;
+	bottom: 50%;
+	transform: translateX(-50%) translateY(50%);
+	
+}
+
+.cardHolder {
+    width:100%;
+    height:100%;
+    position: absolute;
+}
+
+.rulesText {
+    font-size: 5vh;
+}
+
+#rulesDiv {
+    position: absolute;
+    width: 60vh;
+    height: 60vh;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 51;
+    background-color: rgb(240, 240, 240)
+}
+
+.iconImg{
+    width: 3vh;
+    height: 3vh;
+}
+@keyframes shine {
+	0% {
+		background-position: 0% 50%;
+	}
+	100% {
+		background-position: 100% 50%;
+	}
+}
+
+@keyframes attackright  
+{
+	0% {
+		transform: translateX(0%) translateY(-50%);
+	}
+	50% {
+		transform: translateX(100%) translateY(-50%);
+	}
+	100% {
+		transform: translateX(0%) translateY(-50%);
+	}
+}
+@keyframes attackleft 
+{
+	0% {
+		transform: translateX(0%) translateY(-50%);
+	}
+	50% {
+		transform: translateX(-100%) translateY(-50%);
+	}
+	100% {
+		transform: translateX(0%) translateY(-50%);
+	}
+}
+@keyframes dies {
+  0% { transform: translate(2px, 2px) translateY(-50%) rotate(0deg); }
+  10% { transform: translate(-2px, -4px) translateY(-50%) rotate(-1deg); }
+  20% { transform: translate(-6px, 0px) translateY(-50%) rotate(1deg); }
+  30% { transform: translate(6px, 4px) translateY(-50%) rotate(0deg); }
+  40% { transform: translate(2px, -2px) translateY(-50%) rotate(1deg); }
+  50% { transform: translate(-2px, 4px) translateY(-50%) rotate(-1deg); }
+  60% { transform: translate(-6px, 2px)translateY(-50%) rotate(0deg); }
+  70% { transform: translate(6px, 2px) translateY(-50%) rotate(-1deg); }
+  80% { transform: translate(-2px, -2px) translateY(-50%) rotate(1deg); }
+  90% { transform: translate(2px, 4px) translateY(-50%)rotate(0deg); }
+  100% { transform: translate(2px, -4px) translateY(-50%)rotate(-1deg); }
+}
+
+@keyframes fade {
+	0% {opacity:1;}
+	100% {opacity: 0;}
+}

@@ -1,0 +1,58 @@
+<html>
+
+    <head>
+        <link rel = "stylesheet" href = "style.css">
+        <link rel = "stylesheet" href = "cardStyle.css">
+
+    </head>
+    <body>
+        <div id = "mainGame">
+            <div class = "deck" id = "deckA">
+                    
+            </div>
+            <div class = "deck" id = "deckB">
+                
+            </div>
+            <div class = "healthBar" id = "healthBarA">
+                
+                <div class = "healthFill" id = "healthFillA"></div>
+                <div class = "healthLabel"><span id = "healthLabelA">100</span>/100</div>
+                
+            </div>
+            <div class = "healthBar" id = "healthBarB">
+            <div class = "healthFill" id = "healthFillB"></div>
+                <div class = "healthLabel"><span id = "healthLabelB">100</span>/100</div>
+                
+                
+            </div>
+        </div>
+        <button class ="card" id = "type_law" style = "display: none;">
+            <div class = "cardShine"></div>
+            <div class ="cardTitle">dingus</div>
+            
+            <img class = "cardImage" src="Images/Gunfu.jpg">
+            <div class = "cardText">
+                Power: <span class="cardPower">10</span> <br>
+                <span class="cardDesc">It just does damage that its</span>
+                
+            </div>
+        </button>
+        <div id = "rulesDiv" style = "display: none;">
+            <h1>Rules</h1>
+            <div class = "rulesText">
+                Both players play cards at same time<br>
+                <img src = "Images/lawIcon.png" class = "iconImg">
+                beats <img src = "Images/bulletIcon.png" class = "iconImg"> 
+                beats <img src = "Images/moneyIcon.png" class = "iconImg"> 
+                beats <img src = "Images/lawIcon.png" class = "iconImg"><br>
+                If both cards are the same type whichever has more power wins the turn
+            </div>
+        </div>
+        <script src="cards.js"></script>
+        <script src="enemy.js"></script>
+
+        <script src="game.js"></script>
+
+    </body>
+
+</html>
