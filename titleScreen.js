@@ -18,6 +18,7 @@ function CreateCard(diff)
     cardInstance.getElementsByClassName("encounterRatio")[0].textContent = Math.round((wins/total)*1000)/10;
     else
     cardInstance.getElementsByClassName("encounterRatio")[0].textContent = 0;
+    cardInstance.getElementsByClassName("encounterUrl")[0].href = "game.html?diff="+diff;
     cardInstance.style.display = "inherit";
     titleScreen.appendChild(cardInstance);
 }
