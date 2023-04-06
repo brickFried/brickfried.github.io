@@ -320,7 +320,7 @@ let cardset = [
         {
             opponent.health -= pp;
 		if (!pp) return;
-		opponent.cards.push(opponent.cards.splice(0,1));
+		opponent.cards.push(opponent.cards.splice(0,1)[0]);
 		opponent.cards.unshift(16);
             //do it
         }
