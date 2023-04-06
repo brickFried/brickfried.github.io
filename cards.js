@@ -108,7 +108,7 @@ let cardset = [
         }
     },
 	{
-        name: "gay",
+        name: "white man",
         image: "Images/methmonkey.png",
 		type: 2,
         desc: "removes all enemy's gun cards",
