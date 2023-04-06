@@ -142,6 +142,7 @@ function Move(moveA,moveB,gs)
 }
 
 async function AnimateMove(cardInstanceA,cardInstanceB, power) {
+	
 	animating=true;
 	cardInstanceA.style.left = "41vh";
 	cardInstanceA.style.top = "-24vh";
@@ -167,6 +168,10 @@ async function AnimateMove(cardInstanceA,cardInstanceB, power) {
 	cardInstanceB.style.animation = "fade 0.5s ease 1"
 	
 	await new Promise(resolve => setTimeout(resolve, 450));
+	if (!gameState.playerA.health || !gameState.playerB.health)
+	{
+		OnGameEnd();
+	}
 	UpdateCards(gameState.playerA);
 	UpdateCards(gameState.playerB);
 	animating =false;
@@ -216,11 +221,6 @@ function UpdateCards(player)
 		oldIndex++;
 	}
 	player.hand=[player.cards[0],player.cards[1],player.cards[2],player.cards[3]];
-	if (!gameState.playerA.health || !gameState.playerB.health)
-	{
-		if (player.turn)
-		OnGameEnd();
-	}
 }
 
 
