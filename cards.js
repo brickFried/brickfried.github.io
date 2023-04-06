@@ -385,5 +385,52 @@ let cardset = [
             //do it
         }
     },
+	{
+        name: "DOUBLE",
+        image: "https://as2.ftcdn.net/v2/jpg/01/68/54/19/1000_F_168541975_leTixFmvRivoVVwTi70o52S7ZU4Ed6bF.jpg",
+        type: 0,
+        desc: "draw O, even if you miss",
+        power: 25,
+        iVal: 74,
+
+        calcPower: function() {return this.power;}, 
+        onUse: function(user, opponent,pp)
+        {
+            opponent.health -= pp;
+            //do it
+        }
+    },
+
+    {
+        name: "O",
+        image: "https://thumbs.dreamstime.com/b/young-man-giving-two-thumbs-up-7001706.jpg",
+        type: 1,
+        desc: "draw SEVEN, even if you miss",
+        power: 25,
+        iVal: 74,
+
+        calcPower: function() {return this.power;}, 
+        onUse: function(user, opponent,pp)
+        {
+            opponent.health -= pp;
+            //do it
+        }
+    },
+
+    {
+        name: "SEVEN",
+        image: "https://pbs.twimg.com/media/CvloDvIVYAA_tGR.jpg:large",
+        type: 2,
+        desc: "draw DOUBLE, even if you miss",
+        power: 25,
+        iVal: 74,
+
+        calcPower: function() {return this.power;}, 
+        onUse: function(user, opponent,pp)
+        {
+            opponent.health -= pp;
+            //do it
+        }
+    },
 
 ]
