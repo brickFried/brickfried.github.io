@@ -360,6 +360,7 @@ let cardset = [
         image: "https://as2.ftcdn.net/v2/jpg/01/68/54/19/1000_F_168541975_leTixFmvRivoVVwTi70o52S7ZU4Ed6bF.jpg",
         type: 0,
         desc: "draw O, even if you miss",
+		consumable: true,
         power: 25,
         iVal: 74,
 
@@ -367,6 +368,7 @@ let cardset = [
         onUse: function(user, opponent,pp)
         {
             opponent.health -= pp;
+		user.cards.splice(3,0,21);
             //do it
         }
     },
@@ -378,11 +380,14 @@ let cardset = [
         desc: "draw SEVEN, even if you miss",
         power: 25,
         iVal: 74,
+	consumable:true,
 
         calcPower: function() {return this.power;}, 
         onUse: function(user, opponent,pp)
         {
             opponent.health -= pp;
+		user.cards.splice(3,0,22);
+
             //do it
         }
     },
@@ -394,11 +399,14 @@ let cardset = [
         desc: "draw DOUBLE, even if you miss",
         power: 25,
         iVal: 74,
+	    consumable: true,
 
         calcPower: function() {return this.power;}, 
         onUse: function(user, opponent,pp)
         {
             opponent.health -= pp;
+		user.cards.splice(3,0,20);
+		
             //do it
         }
     },
