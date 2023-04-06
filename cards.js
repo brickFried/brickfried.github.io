@@ -342,7 +342,7 @@ let cardset = [
         name: "macho man from punch out",
         image: "https://i1.sndcdn.com/artworks-000490287612-n6a2gm-t500x500.jpg",
         type: 1,
-        desc: "if the opponent also plays guns, they take 30 damage",
+        desc: "if the opponent also plays guns, they might take 30 damage",
         power: 15,
         iVal: 74,
 
@@ -350,7 +350,7 @@ let cardset = [
         onUse: function(user, opponent,pp,oCard)
         {
             opponent.health -= pp;
-		if (oCard.type==1) opponent.health-=30;
+		if (oCard&&oCard.type==1) opponent.health-=30;
             //do it
         }
     },	
