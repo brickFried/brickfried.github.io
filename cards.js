@@ -308,23 +308,6 @@ let cardset = [
         }
     },
 	{
-        name: "rare card",
-        image: "https://media.tenor.com/exRZ3es-yb8AAAAM/maxwell-maxwell-cat.gif",
-        type: 0,
-        desc: "less health u have, more dmg it does",
-        power: 100,
-        iVal: 74,
-
-        calcPower: function(user) {
-            return (this.power-user.health)*0.5;
-        },
-        onUse: function(user, opponent,pp)
-        {
-            opponent.health -= pp;
-            //do the thing
-        }
-    },
-	{
         name: "shit and run",
         image: "https://i.redd.it/vaxcu2n6cyh31.png",
         type: 0,
