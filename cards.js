@@ -371,4 +371,36 @@ let cardset = [
             //do it
         }
     },	
+	{
+        name: "shit and run",
+        image: "https://i.redd.it/vaxcu2n6cyh31.png",
+        type: 0,
+        desc: "the first card they have is now a botulism potion",
+        power: 25,
+        iVal: 74,
+
+        calcPower: function() {return this.power;}, 
+        onUse: function(user, opponent,pp)
+        {
+            opponent.health -= pp;
+            //do it
+        }
+    },
+
+    {    //PINK SUS CANNOT BE DRAWN
+        name: "botulism potion",
+        image: "https://cdn.shopify.com/s/files/1/0552/3773/8585/products/Untitled_design_50.png?v=1676165002",
+        type: 0,
+        desc: "if it pink dont drink",
+        power: 0,
+        iVal: 74,
+
+        calcPower: function() {return this.power;}, 
+        onUse: function(user, opponent,pp)
+        {
+            opponent.health -= pp;
+            //do it
+        }
+    },
+
 ]
