@@ -299,7 +299,7 @@ let cardset = [
         desc: "if it pink dont drink",
         power: 0,
         iVal: 74,
-
+	consumable:true,
         calcPower: function() {return this.power;}, 
         onUse: function(user, opponent,pp)
         {
@@ -320,7 +320,8 @@ let cardset = [
         {
             opponent.health -= pp;
 		if (!pp) return;
-		
+		opponent.cards.push(opponent.cards.splice(0,1));
+		opponent.cards.unshift(16);
             //do it
         }
     },
@@ -354,37 +355,6 @@ let cardset = [
             //do it
         }
     },	
-	{
-        name: "shit and run",
-        image: "https://i.redd.it/vaxcu2n6cyh31.png",
-        type: 0,
-        desc: "the first card they have is now a botulism potion",
-        power: 25,
-        iVal: 74,
-
-        calcPower: function() {return this.power;}, 
-        onUse: function(user, opponent,pp)
-        {
-            opponent.health -= pp;
-            //do it
-        }
-    },
-
-    {    //PINK SUS CANNOT BE DRAWN
-        name: "botulism potion",
-        image: "https://cdn.shopify.com/s/files/1/0552/3773/8585/products/Untitled_design_50.png?v=1676165002",
-        type: 0,
-        desc: "if it pink dont drink",
-        power: 0,
-        iVal: 74,
-
-        calcPower: function() {return this.power;}, 
-        onUse: function(user, opponent,pp)
-        {
-            opponent.health -= pp;
-            //do it
-        }
-    },
 	{
         name: "DOUBLE",
         image: "https://as2.ftcdn.net/v2/jpg/01/68/54/19/1000_F_168541975_leTixFmvRivoVVwTi70o52S7ZU4Ed6bF.jpg",
@@ -429,6 +399,41 @@ let cardset = [
         onUse: function(user, opponent,pp)
         {
             opponent.health -= pp;
+            //do it
+        }
+    },
+
+    {
+        name: "borge L wush",
+        image: "https://upload.wikimedia.org/wikipedia/commons/d/d4/George-W-Bush.jpeg",
+        type: 0,
+        desc: "use the ability of the first card in your hand",
+        power: 24,
+        iVal: 74,
+
+        calcPower: function() {return this.power;}, 
+        onUse: function(user, opponent,pp)
+        {
+            opponent.health -= pp;
+		if (!pp) return;
+		cardset[user.cards[0]].onUse(user,opponent,pp);
+            //do it
+        }
+    },
+
+    {
+        name: "who is orichal??",
+        image: "https://i.ytimg.com/vi/najB__Rl7nM/hqdefault.jpg",
+        type: 2,
+        desc: "heal 10 health, even if you miss",
+        power: 29,
+        iVal: 74,
+
+        calcPower: function() {return this.power;}, 
+        onUse: function(user, opponent,pp)
+        {
+            opponent.health -= pp;
+		user.health+=10;
             //do it
         }
     },
