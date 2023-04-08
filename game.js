@@ -16,7 +16,11 @@ let diffVals = [0,1,3];
 const urlParams = new URLSearchParams(queryString);
 const product = urlParams.get('diff')
 const mirror = urlParams.get('m');
-
+let diffVal = 0;
+window.onload = (event) => {
+	diffVal = diffVals[product];
+	StartGame();
+};
 function StartGame(){
     gameState = {
         playerA: CreatePlayer(0)
@@ -61,7 +65,7 @@ function CreatePlayer(turn) {
 	cards = copyArray(gameState.playerA.cards);
 	else
     cards = shuffle(copyArray(pack));
-	
+
     playerA.cards = cards;
 	playerA.hand = [cards[0],cards[1],cards[2],cards[3]];
     
@@ -273,12 +277,9 @@ function OnGameEnd()
 	}
 }
 
-let diffVal = 0;
-diffVal = diffVals[product];
 function OnInput(slot)
 {
 	let gs = cloneGs(gameState,true);
 	
 	Move(slot,calcMove(gameState,diffVal,true));
 }
-StartGame();
