@@ -10,36 +10,44 @@ const hpA = document.getElementById("healthLabelA");
 const hpB = document.getElementById("healthLabelB");
 let animating =false;
 const tempCard = document.getElementsByClassName("card")[0];
-let pack = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
+let pack = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
 let diffVals = [0,1,3];
+
+const urlParams = new URLSearchParams(queryString);
+const product = urlParams.get('diff')
+const mirror = urlParams.get('m');
 
 function StartGame(){
     gameState = {
-        playerA: CreatePlayer(0),
-        playerB: CreatePlayer(1)
+        playerA: CreatePlayer(0)
     }
+	gameState.playerB = CreatePlayer(1);
 	InitializeCards(gameState.playerA);
 	InitializeCards(gameState.playerB);
 }
 
-function shuffle(array) {
-    let currentIndex = array.length;
-	let randomIndex =0;
-	
+function copyArray(array)
+{
 	let arrayCopy = [];
 	for (let i = 0; i<array.length;i++ )
 	{
 		arrayCopy.push(array[i]);
 	}
+	return arrayCopy;
+}
+function shuffle(array) {
+    let currentIndex = array.length;
+	let randomIndex =0;
+	
     while (currentIndex != 0) {
   
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
   
-      [arrayCopy[currentIndex], arrayCopy[randomIndex]] = [arrayCopy[randomIndex], arrayCopy[currentIndex]];
+      [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
     }
   
-    return arrayCopy;
+    return array;
   }
   
 function CreatePlayer(turn) {
@@ -48,7 +56,12 @@ function CreatePlayer(turn) {
 	else deck=deckA;
 	
     let playerA = {deckInstance: deck, health:100, turn:turn};
-    let cards = shuffle(pack);
+	let cards;
+	if (turn==1 && mirror==1)
+	cards = copyArray(gameState.playerA.cards);
+	else
+    cards = shuffle(copyArray(pack));
+	
     playerA.cards = cards;
 	playerA.hand = [cards[0],cards[1],cards[2],cards[3]];
     
@@ -259,8 +272,7 @@ function OnGameEnd()
 
 	}
 }
-const urlParams = new URLSearchParams(queryString);
-const product = urlParams.get('diff')
+
 let diffVal = 0;
 diffVal = diffVals[product];
 function OnInput(slot)

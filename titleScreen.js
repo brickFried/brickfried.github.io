@@ -18,7 +18,7 @@ function CreateCard(diff)
     cardInstance.getElementsByClassName("encounterRatio")[0].textContent = Math.round((wins/total)*1000)/10;
     else
     cardInstance.getElementsByClassName("encounterRatio")[0].textContent = 0;
-    cardInstance.getElementsByClassName("encounterUrl")[0].href = "game.html?diff="+diff;
+    cardInstance.getElementsByClassName("playButton")[0].onclick = function(){OnEncounter(diff);}
     cardInstance.style.display = "inherit";
     titleScreen.appendChild(cardInstance);
 }
@@ -26,4 +26,9 @@ function CreateCard(diff)
 for (let i = 0; i < cards.length; i++)
 {
     CreateCard(i);
+}
+
+function OnEncounter(diff)
+{
+    window.location.href = "game.html?diff="+diff+"&m="+((document.getElementById("mirrorMode").checked)?1:0);
 }
