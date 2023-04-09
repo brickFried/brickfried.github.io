@@ -82,15 +82,16 @@ function cheatMove(gs1, playerMove, level,isTop)
             return i;
             return 0;
         }
-        if (gs.playerB.health==0) {
-            continue;
-        }
+       
 
         let x = gs.playerA.health;
         let y = gs.playerB.health-100;
 
         let dist=0;
-        if (level > 0)
+        if (gs.playerB.health==0) {
+            dist = 1000000+level;
+        }
+        else if (level > 0)
         {
             for (let j = 0; j < 4; j++)
             {
