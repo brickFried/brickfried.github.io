@@ -73,23 +73,21 @@ function cheatMove(gs1, playerMove, level,isTop)
 {
     let move = 0;
     let lowestDistance = Infinity;
+    let scores = [];
     for (let i = 0; i < 4; i++)
     {
         let gs = cloneGs(gs1);
         Move(playerMove,i,gs);
-        if (!gs.playerA.health) {
-            if (isTop)
-            return i;
-            return 0;
-        }
-       
 
-        let x = gs.playerA.health;
-        let y = gs.playerB.health-100;
+        let x = gs.playerA.health-100;
 
         let dist=0;
+        if (!gs.playerA.health)
+        {
+            dist = 100000+parseInt(level);
+        }
         if (gs.playerB.health==0) {
-            dist = 1000000+level;
+            dist = 1000000+parseInt(level);
         }
         else if (level > 0)
         {
@@ -99,14 +97,20 @@ function cheatMove(gs1, playerMove, level,isTop)
             }
         }
         else
-            dist = x*x+y*y;
+            dist = x*x;
+        scores.push(dist);
         if (dist < lowestDistance) {
             lowestDistance = dist;
             move = i;
         }
     }
     if (isTop)
-    return move;
+    {
+        console.log(scores)
+
+        return move;
+    }
+
     return lowestDistance;
 }
 

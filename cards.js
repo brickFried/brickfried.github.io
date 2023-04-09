@@ -267,7 +267,7 @@ let cardset = [
         iVal: 74,
 
         calcPower: function(user) {
-            return (1-user.health/user.maxHealth)*50;
+            return Math.round((1-user.health/user.maxHealth)*50);
         },
         onUse: function(user, opponent,pp)
         {
