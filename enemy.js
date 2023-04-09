@@ -14,6 +14,7 @@ function clonePlayer(player)
 {
     return {
         health:player.health,
+        maxHealth: player.maxHealth,
         cards:player.cards.slice()
     }
 }
@@ -63,9 +64,48 @@ function calcMove(gs1, level, isTop)
     }
     if (isTop)
     {
-        console.log(scores);
         return move;
     }
+    return lowestDistance;
+}
+
+function cheatMove(gs1, playerMove, level,isTop)
+{
+    let move = 0;
+    let lowestDistance = Infinity;
+    for (let i = 0; i < 4; i++)
+    {
+        let gs = cloneGs(gs1);
+        Move(playerMove,i,gs);
+        if (!gs.playerA.health) {
+            if (isTop)
+            return i;
+            return 0;
+        }
+        if (gs.playerB.health==0) {
+            continue;
+        }
+
+        let x = gs.playerA.health;
+        let y = gs.playerB.health-100;
+
+        let dist=0;
+        if (level > 0)
+        {
+            for (let j = 0; j < 4; j++)
+            {
+                dist = Math.max(cheatMove(gs,j,level-1,false),dist);
+            }
+        }
+        else
+            dist = x*x+y*y;
+        if (dist < lowestDistance) {
+            lowestDistance = dist;
+            move = i;
+        }
+    }
+    if (isTop)
+    return move;
     return lowestDistance;
 }
 

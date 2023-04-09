@@ -8,10 +8,13 @@ const healthA = document.getElementById("healthFillA");
 const healthB = document.getElementById("healthFillB");
 const hpA = document.getElementById("healthLabelA");
 const hpB = document.getElementById("healthLabelB");
+const mhpA = document.getElementById("maxHealthA");
+const mhpB = document.getElementById("maxHealthB");
 let animating =false;
 const tempCard = document.getElementsByClassName("card")[0];
 let pack = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
-let diffVals = [0,1,3];
+
+let diffVals = [0,1,3,"a3"];
 
 const urlParams = new URLSearchParams(queryString);
 const product = urlParams.get('diff')
@@ -21,6 +24,7 @@ window.onload = (event) => {
 	diffVal = diffVals[product];
 	StartGame();
 };
+
 function StartGame(){
     gameState = {
         playerA: CreatePlayer(0)
@@ -28,6 +32,12 @@ function StartGame(){
 	gameState.playerB = CreatePlayer(1);
 	InitializeCards(gameState.playerA);
 	InitializeCards(gameState.playerB);
+	healthFillA.style.width=(gameState.playerA.health/gameState.playerA.maxHealth)*100+"%";
+	healthFillB.style.width=(gameState.playerB.health/gameState.playerB.maxHealth)*100+"%";
+	hpA.textContent=gameState.playerA.health;
+	hpB.textContent = gameState.playerB.health;
+	mhpA.textContent=gameState.playerA.maxHealth;
+	mhpB.textContent = gameState.playerB.maxHealth;
 }
 
 function copyArray(array)
@@ -59,13 +69,18 @@ function CreatePlayer(turn) {
 	if (turn) deck = deckB;
 	else deck=deckA;
 	
-    let playerA = {deckInstance: deck, health:100, turn:turn};
+    let playerA = {deckInstance: deck, health:100, maxHealth:100,turn:turn};
 	let cards;
 	if (turn==1 && mirror==1)
 	cards = copyArray(gameState.playerA.cards);
 	else
     cards = shuffle(copyArray(pack));
 
+	if (turn==1&&diffVal[0]=="a")
+	{
+		playerA.health=1;
+		playerA.maxHealth = 1;
+	}
     playerA.cards = cards;
 	playerA.hand = [cards[0],cards[1],cards[2],cards[3]];
     
@@ -148,8 +163,8 @@ function Move(moveA,moveB,gs)
 	cardA.onUse(gs.playerA,gs.playerB,power[0],cardB);
 	cardB.onUse(gs.playerB,gs.playerA,power[1],cardA);
 
-	gs.playerA.health = Math.max(Math.min(gs.playerA.health,100),0);
-	gs.playerB.health = Math.max(Math.min(gs.playerB.health,100),0);
+	gs.playerA.health = Math.max(Math.min(gs.playerA.health,gs.playerA.maxHealth),0);
+	gs.playerB.health = Math.max(Math.min(gs.playerB.health,gs.playerB.maxHealth),0);
 	
 	if (sim) return;
 	var cardInstanceA =gs.playerA.cardInstances[moveA];
@@ -176,8 +191,8 @@ async function AnimateMove(cardInstanceA,cardInstanceB, power) {
 		cardInstanceB.style.animation = "attackleft 0.4s ease 1"
 		cardInstanceA.style.animation = "dies 0.4s ease 1"
 	}
-	healthFillA.style.width=gameState.playerA.health+"%";
-	healthFillB.style.width=gameState.playerB.health+"%";
+	healthFillA.style.width=(gameState.playerA.health/gameState.playerA.maxHealth)*100+"%";
+	healthFillB.style.width=(gameState.playerB.health/gameState.playerB.maxHealth)*100+"%";
 	hpA.textContent=gameState.playerA.health;
 	hpB.textContent = gameState.playerB.health;
 	await new Promise(resolve => setTimeout(resolve, 600));
@@ -280,6 +295,8 @@ function OnGameEnd()
 function OnInput(slot)
 {
 	let gs = cloneGs(gameState,true);
-	
+	if (diffVal[0] == "a")
+	Move(slot,cheatMove(gameState,slot,diffVal[1],true));
+	else
 	Move(slot,calcMove(gameState,diffVal,true));
 }

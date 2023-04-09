@@ -1,6 +1,6 @@
 const tempCard = document.getElementsByClassName("encounterCard")[0];
 const titleScreen = document.getElementById("titleScreen");
-let cards = ["Easy AI","Medium AI","Hard AI"];
+let cards = ["Easy AI","Medium AI","Hard AI","Fun AI"];
 
 function CreateCard(diff)
 {
