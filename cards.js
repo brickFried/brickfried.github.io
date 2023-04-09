@@ -267,7 +267,7 @@ let cardset = [
         iVal: 74,
 
         calcPower: function(user) {
-            return (this.power-user.health)*0.5;
+            return (1-user.health/user.maxHealth)*50;
         },
         onUse: function(user, opponent,pp)
         {
