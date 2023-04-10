@@ -24,12 +24,14 @@ const mirror = urlParams.get('m');
 let diffVal = 0;
 window.onload = (event) => {
 	diffVal = diffVals[product];
+	console.log(diffVal);
 	StartGame();
 };
 
 function StartGame(){
-	if (diffVal = "m")
+	if (diffVal == "m")
 	{
+		console.log(diffVal);
 		turnInd.textContent = "Player1's turn"
 	}
     gameState = {
@@ -212,7 +214,7 @@ async function AnimateMove(cardInstanceA,cardInstanceB, power) {
 	UpdateCards(gameState.playerA);
 	UpdateCards(gameState.playerB);
 	animating =false;
-	if (diffVal = "m")
+	if (diffVal == "m")
 	turnInd.textContent = "Player1's turn"
 
 }
