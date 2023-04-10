@@ -10,12 +10,14 @@ const hpA = document.getElementById("healthLabelA");
 const hpB = document.getElementById("healthLabelB");
 const mhpA = document.getElementById("maxHealthA");
 const mhpB = document.getElementById("maxHealthB");
+const turnInd = document.getElementById("turnIndicator");
+
 let animating =false;
 const tempCard = document.getElementsByClassName("card")[0];
 let pack = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
-
-let diffVals = [0,1,3,"a3"];
-
+let turn = 0;
+let diffVals = ["m",0,1,3,"a3"];
+let otherGuysMove;
 const urlParams = new URLSearchParams(queryString);
 const product = urlParams.get('diff')
 const mirror = urlParams.get('m');
@@ -26,6 +28,10 @@ window.onload = (event) => {
 };
 
 function StartGame(){
+	if (diffVal = "m")
+	{
+		turnInd.textContent = "Player1's turn"
+	}
     gameState = {
         playerA: CreatePlayer(0)
     }
@@ -101,11 +107,10 @@ function InitializeCard(playerA, slot){
 
 	playerA.cardInstances.push(cardInstance);
 	
-	if (!playerA.turn) { 
-		cardInstance.onclick = function(){
-			OnInput(slot);
-		};
-	}
+	cardInstance.onclick = function(){
+		OnInput(slot,playerA.turn);
+	};
+
 	cardInstance.style.display = "flex";
 	var cardobj = cardset[playerA.cards[slot]];
 	if (cardobj.type==0)
@@ -174,7 +179,7 @@ function Move(moveA,moveB,gs)
 }
 
 async function AnimateMove(cardInstanceA,cardInstanceB, power) {
-	
+	turnInd.textContent = ""
 	animating=true;
 	cardInstanceA.style.left = "41vh";
 	cardInstanceA.style.top = "-24vh";
@@ -207,6 +212,9 @@ async function AnimateMove(cardInstanceA,cardInstanceB, power) {
 	UpdateCards(gameState.playerA);
 	UpdateCards(gameState.playerB);
 	animating =false;
+	if (diffVal = "m")
+	turnInd.textContent = "Player1's turn"
+
 }
 
 function UpdateCards(player)
@@ -246,9 +254,8 @@ function UpdateCards(player)
 		player.cardInstances[i].style.top = "";
 		var otherPlayer = player.turn?gameState.playerA:gameState.playerB;
 		player.cardInstances[i].getElementsByClassName("cardPower")[0].textContent = cardset[player.cards[i]].calcPower(player,otherPlayer);
-		if (!player.turn)
 		player.cardInstances[i].onclick = function(){
-			OnInput(i);
+			OnInput(i,player.turn);
 		};
 		oldIndex++;
 	}
@@ -292,9 +299,27 @@ function OnGameEnd()
 	}
 }
 
-function OnInput(slot)
+function OnInput(slot,inputTurn)
 {
-	let gs = cloneGs(gameState,true);
+	if (turn!=inputTurn) return;
+	
+	if (diffVal == "m")
+	{
+		if (turn)
+		{
+			turnInd.textContent = ""
+			Move(otherGuysMove,slot);
+		}
+		else
+		{
+			turnInd.textContent = "Player2's turn"
+		}
+		otherGuysMove = slot
+		turn = !turn;
+		
+		
+		return;
+	}
 	if (diffVal[0] == "a")
 	Move(slot,cheatMove(gameState,slot,diffVal[1],true));
 	else
